@@ -25,11 +25,16 @@
             </div>
             <div class="new-book-form">
                 <h2>New Book Info</h2>
-                <div class="new-title">Title: <input id="new-title"></div>
-                <div class="new-author">Author: <input id="new-author"></div>
-                <div class="new-pages">Pages: <input id="new-pages"></div>
-                <div class="new-color">Color: <input id="new-color" type="color"></div>
-                <button class="create-button">Create Book</button>
+                <form>
+                    <div><label for="new-title">Title: </label><input id="new-title"></div>
+                    <div><label for="new-author">Author: </label><input id="new-author"></div>
+                    <div><label for="new-pages">Pages: </label><input id="new-pages"></div>
+                    <div>
+                        <label for="new-color">Color: </label><input id="new-color" type="color">
+                        <button class="random-button">Randomize Color</button>
+                    </div>
+                    <button class="create-button">Create Book</button>
+                </form>
             </div>
         </div>
     </body>
