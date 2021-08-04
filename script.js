@@ -42,9 +42,7 @@ function createBookDiv(book, index) {
     bookDiv.classList.add("bookspine");
     bookDiv.textContent = book.title;
     bookDiv.style.backgroundColor = book.color;
-    bookDiv.addEventListener("click", e => {
-        console.log(e.target.info());
-    })
+    bookDiv.addEventListener("click", e => {displayBookInfo(e.target.dataset.index);})
     return bookDiv;
 }
 
