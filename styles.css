@@ -50,3 +50,19 @@ h1 {
     text-orientation: mixed;
     text-align: center;
 }
+
+.current-title,
+.current-author,
+.current-pages,
+.current-status {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.current-title p,
+.current-author p,
+.current-pages p,
+.current-status p {
+    padding-left: 5px;
+}

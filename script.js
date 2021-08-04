@@ -9,9 +9,8 @@ class Book {
         this.color = color;
         this.read = read;
 
-        this.info = function () {
-            return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read ? "already read" : "not read yet"}`;
-        };
+        this.readStatus = () => this.read ? "already read" : "not read yet";
+        this.info = () => `${this.title} by ${this.author}, ${this.pages} pages, ${this.readStatus()}`;
     }
 }
 
@@ -28,7 +27,7 @@ function createNewBook() {
 function updateBookshelf() {
     cleanBookshelf();
     console.table(Library);
-    Library.forEach(book => {bookshelf.appendChild(createBookDiv(book))});
+    Library.forEach((book, index) => {bookshelf.appendChild(createBookDiv(book, index))});
 }
 
 function cleanBookshelf() {
@@ -37,8 +36,9 @@ function cleanBookshelf() {
     }
 }
 
-function createBookDiv(book) {
+function createBookDiv(book, index) {
     let bookDiv = document.createElement("div");
+    bookDiv.dataset.index = index;
     bookDiv.classList.add("bookspine");
     bookDiv.textContent = book.title;
     bookDiv.style.backgroundColor = book.color;
@@ -49,6 +49,19 @@ function createBookDiv(book) {
 }
 
 document.querySelector(".create-button").addEventListener("click", createNewBook);
+
+function displayBookInfo(index) {
+    const book = Library[index];
+    const title = document.querySelector(".current-title p");
+    const author = document.querySelector(".current-author p");
+    const pages = document.querySelector(".current-pages p");
+    const read = document.querySelector(".current-status p");
+
+    title.textContent = book.title;
+    author.textContent = book.author;
+    pages.textContent = book.pages;
+    read.textContent = book.readStatus();
+}
 
 function randomHEX() {
     const red = Math.floor(Math.random() * 256).toString(16);
