@@ -1,5 +1,27 @@
 let Library = [];
 const bookshelf = document.querySelector(".bookshelf");
+// localStorage.clear();
+
+function saveLibrary() {
+    localStorage.setItem("Library", JSON.stringify(Library))
+    localStorage.setItem("available", true)
+}
+
+function loadLibrary() {
+    // Try to load library if it is defined in localstorage
+    if (localStorage.getItem("available")) {
+        Library = JSON.parse(localStorage.getItem("Library"))};
+    // Re-generate book methods to every book object inside library
+    console.log(Array.isArray(Library));
+    console.table(Library);
+    console.log(Library)
+    Library.forEach( book => {
+        book.readStatus = () => this.read ? "already read" : "not read yet";
+        book.info = () => `${this.title} by ${this.author}, ${this.pages} pages, ${this.readStatus()}`;
+    })
+    // Display initial Library on bookshelf
+    updateBookshelf();
+}
 
 class Book {
     constructor(title, author, pages, color, read = false) {
@@ -21,6 +43,7 @@ function createNewBook() {
     const color = document.getElementById("new-color").value;
     const book = new Book(title, author, pages, color);
     Library.push(book);
+    saveLibrary();
     updateBookshelf();
 }
 
@@ -48,6 +71,7 @@ function createBookDiv(book, index) {
 function deleteBook(event) {
     index = event.target.dataset.deleteIndex;
     Library.splice(index, 1);
+    saveLibrary();
     updateBookshelf();
     displayBookInfo("none");
 }
@@ -55,6 +79,7 @@ function deleteBook(event) {
 function toggleRead(event) {
     book = Library[event.target.dataset.readIndex];
     book.read = !book.read;
+    saveLibrary();
     let message = book.read ? "Unmark as Read": "Mark as Read";
     event.target.textContent = message;
     document.querySelector(".current-status p").textContent = book.readStatus();
@@ -100,6 +125,7 @@ function randomizeColor() {
     color.value = randomHEX();
 }
 
+loadLibrary();
 document.querySelector(".random-button").addEventListener("click", randomizeColor);
 document.querySelector(".create-button").addEventListener("click", createNewBook);
 document.querySelector(".delete-button").addEventListener("click", deleteBook);
