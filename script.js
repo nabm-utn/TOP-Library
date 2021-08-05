@@ -15,9 +15,8 @@ function loadLibrary() {
     console.log(Array.isArray(Library));
     console.table(Library);
     console.log(Library)
-    Library.forEach( book => {
-        book.readStatus = () => this.read ? "already read" : "not read yet";
-        book.info = () => `${this.title} by ${this.author}, ${this.pages} pages, ${this.readStatus()}`;
+    Library.forEach( (book, index) => {
+        Library[index] = new Book(book.title, book.author, book.pages, book.color, book.read);
     })
     // Display initial Library on bookshelf
     updateBookshelf();
@@ -102,6 +101,7 @@ function displayBookInfo(event) {
         read.textContent = book.readStatus();
         deleteButton.dataset.deleteIndex = index;
         readButton.dataset.readIndex = index;
+        readButton.textContent = book.read ? "Unmark as Read": "Mark as Read";
     } else {
         title.textContent = "";
         author.textContent = "";
@@ -109,6 +109,7 @@ function displayBookInfo(event) {
         read.textContent = "";
         deleteButton.dataset.deleteIndex = -1;
         readButton.dataset.readIndex = -1;
+        
     }
 
 }
