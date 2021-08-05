@@ -26,7 +26,6 @@ function createNewBook() {
 
 function updateBookshelf() {
     cleanBookshelf();
-    console.table(Library);
     Library.forEach((book, index) => {bookshelf.appendChild(createBookDiv(book, index))});
 }
 
@@ -42,7 +41,7 @@ function createBookDiv(book, index) {
     bookDiv.classList.add("bookspine");
     bookDiv.textContent = book.title;
     bookDiv.style.backgroundColor = book.color;
-    bookDiv.addEventListener("click", e => {displayBookInfo(e.target.dataset.index);})
+    bookDiv.addEventListener("click", displayBookInfo)
     return bookDiv;
 }
 
@@ -53,7 +52,8 @@ function deleteBook(event) {
     displayBookInfo("none");
 }
 
-function displayBookInfo(index) {
+function displayBookInfo(event) {
+    index = (event === "none") ? "none": event.target.dataset.index;
     const book = Library[index];
     const title = document.querySelector(".current-title p");
     const author = document.querySelector(".current-author p");
