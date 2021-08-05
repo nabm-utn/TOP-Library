@@ -46,7 +46,12 @@ function createBookDiv(book, index) {
     return bookDiv;
 }
 
-document.querySelector(".create-button").addEventListener("click", createNewBook);
+function deleteBook(event) {
+    index = event.target.dataset.deleteIndex;
+    Library.splice(index, 1);
+    updateBookshelf();
+    displayBookInfo("none");
+}
 
 function displayBookInfo(index) {
     const book = Library[index];
@@ -54,11 +59,25 @@ function displayBookInfo(index) {
     const author = document.querySelector(".current-author p");
     const pages = document.querySelector(".current-pages p");
     const read = document.querySelector(".current-status p");
+    const deleteButton = document.querySelector(".delete-button");
+    const readButton = document.querySelector(".read-button");
 
-    title.textContent = book.title;
-    author.textContent = book.author;
-    pages.textContent = book.pages;
-    read.textContent = book.readStatus();
+    if (index != "none") {
+        title.textContent = book.title;
+        author.textContent = book.author;
+        pages.textContent = book.pages;
+        read.textContent = book.readStatus();
+        deleteButton.dataset.deleteIndex = index;
+        readButton.dataset.readIndex = index;
+    } else {
+        title.textContent = "";
+        author.textContent = "";
+        pages.textContent = "";
+        read.textContent = "";
+        deleteButton.dataset.deleteIndex = 0;
+        readButton.dataset.readIndex = 0;
+    }
+
 }
 
 function randomHEX() {
@@ -73,4 +92,6 @@ function randomizeColor() {
     color.value = randomHEX();
 }
 
-document.querySelector(".random-button").addEventListener("click", randomizeColor)
+document.querySelector(".random-button").addEventListener("click", randomizeColor);
+document.querySelector(".create-button").addEventListener("click", createNewBook);
+document.querySelector(".delete-button").addEventListener("click", deleteBook);
