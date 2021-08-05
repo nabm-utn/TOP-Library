@@ -52,6 +52,14 @@ function deleteBook(event) {
     displayBookInfo("none");
 }
 
+function toggleRead(event) {
+    index = event.target.dataset.readIndex;
+    Library[index].read = !Library[index].read;
+    let message = Library[index].read ? "Unmark as Read": "Mark as Read";
+    event.target.textContent = message;
+    document.querySelector(".current-status p").textContent = Library[index].readStatus();
+}
+
 function displayBookInfo(event) {
     index = (event === "none") ? "none": event.target.dataset.index;
     const book = Library[index];
@@ -74,8 +82,8 @@ function displayBookInfo(event) {
         author.textContent = "";
         pages.textContent = "";
         read.textContent = "";
-        deleteButton.dataset.deleteIndex = 0;
-        readButton.dataset.readIndex = 0;
+        deleteButton.dataset.deleteIndex = -1;
+        readButton.dataset.readIndex = -1;
     }
 
 }
@@ -95,3 +103,4 @@ function randomizeColor() {
 document.querySelector(".random-button").addEventListener("click", randomizeColor);
 document.querySelector(".create-button").addEventListener("click", createNewBook);
 document.querySelector(".delete-button").addEventListener("click", deleteBook);
+document.querySelector(".read-button").addEventListener("click", toggleRead);
