@@ -53,11 +53,11 @@ function deleteBook(event) {
 }
 
 function toggleRead(event) {
-    index = event.target.dataset.readIndex;
-    Library[index].read = !Library[index].read;
-    let message = Library[index].read ? "Unmark as Read": "Mark as Read";
+    book = Library[event.target.dataset.readIndex];
+    book.read = !book.read;
+    let message = book.read ? "Unmark as Read": "Mark as Read";
     event.target.textContent = message;
-    document.querySelector(".current-status p").textContent = Library[index].readStatus();
+    document.querySelector(".current-status p").textContent = book.readStatus();
 }
 
 function displayBookInfo(event) {
