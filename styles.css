@@ -51,6 +51,15 @@ h1 {
     text-align: center;
 }
 
+.current-book-info {
+    background-color: indianred;
+    width: 25vw;
+    height: 25vh;
+    border-radius: 20px;
+    border: solid 3px rgb(182, 79, 79);
+    padding: 10px;
+}
+
 .current-title,
 .current-author,
 .current-pages,
@@ -65,4 +74,13 @@ h1 {
 .current-pages p,
 .current-status p {
     padding-left: 5px;
+}
+
+.new-book-form {
+    background-color: rgb(205, 143, 92);
+    width: 25vw;
+    height: 25vh;
+    border-radius: 20px;
+    border: solid 3px rgb(182, 134, 79);
+    padding: 10px;
 }
