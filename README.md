@@ -11,3 +11,4 @@ However, i'm not satisfies with the way it looks, and i think i could add severa
 * Add an option for sorting books by name, author and/or number of pages.
 * Add an option for adding X ammount of pre-generated books (mainly literature classics).
 * Make the new book form appear on demand.
+* Add field verification to the new book form.
