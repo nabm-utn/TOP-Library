@@ -1,4 +1,6 @@
 let Library = [];
+
+
 const bookshelf = document.querySelector(".bookshelf");
 // localStorage.clear();
 
@@ -126,8 +128,30 @@ function randomizeColor() {
     color.value = randomHEX();
 }
 
+
+function deleteAllBooks() {
+    Library = [];
+    saveLibrary();
+    updateBookshelf();
+}
+
+
+function autoPopulate() {
+    let Classics = [];
+    Classics.push(new Book("El tunel", "Ernesto Sabato", 106, randomHEX()));
+    Classics.push(new Book("El Aleph", "Jorge Luis Borges", 146, randomHEX()));
+    Classics.push(new Book("El Principito", "Antoine de Saint-Exupery", 122, randomHEX()));
+    Classics.push(new Book("Diario de Anna Frank", "Anna Frank", 211, randomHEX()));
+    Classics.push(new Book("Harry Potter", "JK Rowling", 495, randomHEX()));
+    Classics.forEach(book => {Library.push(book)});
+    saveLibrary();
+    updateBookshelf();
+}
+
 loadLibrary();
 document.querySelector(".random-button").addEventListener("click", randomizeColor);
 document.querySelector(".create-button").addEventListener("click", createNewBook);
 document.querySelector(".delete-button").addEventListener("click", deleteBook);
 document.querySelector(".read-button").addEventListener("click", toggleRead);
+document.querySelector(".delete-all").addEventListener("click", deleteAllBooks);
+document.querySelector(".auto-populate").addEventListener("click", autoPopulate);

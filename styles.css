@@ -24,6 +24,7 @@ h1 {
     box-shadow: 2px 2px 5px 5px ;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: flex-start;
     padding: 0 2px;
